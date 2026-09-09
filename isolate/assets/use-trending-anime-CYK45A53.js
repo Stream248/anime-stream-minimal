@@ -1,0 +1,1 @@
+import{r as i}from"./react-vendor-iD-Vihsm.js";import{b as s,a as r,u as t}from"./index-Bc8_0aOW.js";function c(){const e=s(r.trending.getTrending,{}),n=t(r.trending.maybeRefreshTrending);return i.useEffect(()=>{n().catch(a=>{console.warn("Trending refresh check failed:",a)})},[]),{anime:e??void 0,isLoading:e===void 0,isError:!1}}export{c as u};

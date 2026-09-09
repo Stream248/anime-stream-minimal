@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Ad network crawler (verifies page content for better ad targeting)
+User-agent: Mediapartners-Google
+Allow: /
+
+# Ad verification bots
+User-agent: AdsBot-Google
+Allow: /
+
+Sitemap: https://comichome.app/sitemap.xml
