@@ -1,0 +1,24 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <!-- Comic Home social share card — minimal, from the logo's design language -->
+  <rect width="1200" height="630" fill="#000000"/>
+
+  <!-- Viewfinder corner brackets (logo motif) -->
+  <g stroke="#FDFDFD" stroke-width="14" fill="none">
+    <path d="M 96 176 L 96 96 L 176 96"/>
+    <path d="M 1024 96 L 1104 96 L 1104 176"/>
+    <path d="M 1104 454 L 1104 534 L 1024 534"/>
+    <path d="M 176 534 L 96 534 L 96 454"/>
+  </g>
+
+  <!-- Sparkle (from the logo) -->
+  <path d="M600 172 C602 186 608 199 619 210 C630 221 643 227 657 229 L657 243 C643 245 630 251 619 262 C608 273 602 286 600 300 C598 286 592 273 581 262 C570 251 557 245 543 243 L543 229 C557 227 570 221 581 210 C592 199 598 186 600 172 Z" fill="#FDFDFD"/>
+
+  <!-- Wordmark -->
+  <text x="600" y="368" text-anchor="middle" font-family="Inter, Helvetica, Arial, sans-serif" font-size="104" font-weight="600" letter-spacing="-2" fill="#FDFDFD">Comic Home</text>
+
+  <!-- Tagline -->
+  <text x="600" y="432" text-anchor="middle" font-family="Inter, Helvetica, Arial, sans-serif" font-size="30" font-weight="400" letter-spacing="0" fill="#A3A3A3">Anime recommendations, matched to your taste</text>
+
+  <!-- Bottom bar (logo motif) -->
+  <rect x="508" y="486" width="184" height="30" fill="#FDFDFD"/>
+</svg>

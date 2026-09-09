@@ -1,7 +1,5 @@
 import { useEffect } from "react";
-
-const SITE_URL = "https://comichome.app";
-const SITE_NAME = "Comic Home";
+import { SITE_NAME, getSiteUrl, getShareImageUrl } from "@/lib/site";
 
 function setMeta(attr: "name" | "property", key: string, content: string) {
   let el = document.head.querySelector<HTMLMetaElement>(
@@ -48,14 +46,16 @@ export interface SeoInput {
  * Keeps <head> in sync with the active route. SPA navigation replaces the
  * document title, meta description, canonical URL, Open Graph / Twitter tags,
  * and route structured data, so crawlers and link previews always see the
- * right metadata for the page being viewed.
+ * right metadata for the page being viewed. URLs are built from the origin
+ * the app is actually served from (see getSiteUrl in lib/site.ts).
  */
 export function useSeo({ title, description, path, jsonLd }: SeoInput) {
   useEffect(() => {
+    const base = getSiteUrl();
     const fullTitle = title.includes(SITE_NAME)
       ? title
       : `${title} — ${SITE_NAME}`;
-    const url = `${SITE_URL}${path}`;
+    const url = `${base}${path}`;
 
     document.title = fullTitle;
     setMeta("name", "description", description);
@@ -67,6 +67,12 @@ export function useSeo({ title, description, path, jsonLd }: SeoInput) {
 
     setMeta("name", "twitter:title", fullTitle);
     setMeta("name", "twitter:description", description);
+
+    // Share image as an absolute URL against the live origin, as required
+    // by social platforms.
+    const shareImage = getShareImageUrl();
+    setMeta("property", "og:image", shareImage);
+    setMeta("name", "twitter:image", shareImage);
 
     if (jsonLd) {
       setJsonLd(jsonLd.id, jsonLd.data);

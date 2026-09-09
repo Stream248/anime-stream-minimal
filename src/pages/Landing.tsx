@@ -8,6 +8,7 @@ import { TrendingGrid, TrendingSkeleton } from "@/components/TrendingGrid";
 import { FeedbackSection } from "@/components/FeedbackSection";
 import { useTrendingAnime } from "@/hooks/use-trending-anime";
 import { useSeo } from "@/hooks/use-seo";
+import { getSiteUrl } from "@/lib/site";
 
 const FEATURES = [
   {
@@ -37,6 +38,7 @@ export default function Landing() {
 
   // Structured data: the trending chart as an ItemList so titles can appear
   // as rich results for queries like "trending anime".
+  const siteUrl = getSiteUrl();
   const jsonLd = isLoading
     ? null
     : {
@@ -48,7 +50,7 @@ export default function Landing() {
           itemListElement: (anime ?? []).slice(0, 12).map((item, i) => ({
             "@type": "ListItem",
             position: i + 1,
-            url: `https://comichome.app/search?q=${encodeURIComponent(item.title)}`,
+            url: `${siteUrl}/search?q=${encodeURIComponent(item.title)}`,
             name: item.title,
           })),
         },

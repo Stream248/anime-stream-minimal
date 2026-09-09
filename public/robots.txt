@@ -9,4 +9,4 @@ Allow: /
 User-agent: AdsBot-Google
 Allow: /
 
-Sitemap: https://comichome.app/sitemap.xml
+Sitemap: /sitemap.xml
