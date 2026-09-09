@@ -73,7 +73,10 @@ export function BannerAd({
       const iframe = document.createElement("iframe");
       iframe.width = String(WIDTH);
       iframe.height = String(HEIGHT);
-      iframe.sandbox = "allow-scripts allow-popups allow-popups-to-escape-sandbox";
+      // allow-same-origin is required: the ad script touches storage/cookies,
+      // and in a sandboxed opaque origin those calls throw and kill the ad.
+      iframe.sandbox =
+        "allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-forms";
       iframe.style.border = "0";
       iframe.style.display = "block";
 
@@ -115,9 +118,10 @@ export function BannerAd({
   return (
     <div
       className={cn(
-        "flex w-full items-center justify-center overflow-hidden",
+        "relative flex w-full items-center justify-center overflow-hidden",
         className,
       )}
+      style={{ minHeight: HEIGHT }}
     >
       {state === "failed" ? null : (
         <div
