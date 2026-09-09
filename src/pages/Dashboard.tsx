@@ -7,6 +7,7 @@ import { useTrendingAnime } from "@/hooks/use-trending-anime";
 import { useAuth } from "@/hooks/use-auth";
 import { RefreshCw } from "lucide-react";
 import { Link } from "react-router";
+import { useSeo } from "@/hooks/use-seo";
 
 /**
  * The signed-in library: the same minimal trending list, framed for a member
@@ -15,6 +16,13 @@ import { Link } from "react-router";
 export default function Dashboard() {
   const { user } = useAuth();
   const { anime, isLoading } = useTrendingAnime();
+
+  useSeo({
+    title: "Your Library",
+    description:
+      "Your personal Comic Home library — trending anime picked for you, refreshed every six hours from MyAnimeList.",
+    path: "/dashboard",
+  });
 
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">

@@ -7,6 +7,7 @@ import { BannerAd } from "@/components/BannerAd";
 import { TrendingGrid, TrendingSkeleton } from "@/components/TrendingGrid";
 import { FeedbackSection } from "@/components/FeedbackSection";
 import { useTrendingAnime } from "@/hooks/use-trending-anime";
+import { useSeo } from "@/hooks/use-seo";
 
 const FEATURES = [
   {
@@ -33,6 +34,33 @@ const FEATURES = [
 
 export default function Landing() {
   const { anime, isLoading } = useTrendingAnime();
+
+  // Structured data: the trending chart as an ItemList so titles can appear
+  // as rich results for queries like "trending anime".
+  const jsonLd = isLoading
+    ? null
+    : {
+        id: "seo-trending-list",
+        data: {
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          name: "Trending anime on Comic Home",
+          itemListElement: (anime ?? []).slice(0, 12).map((item, i) => ({
+            "@type": "ListItem",
+            position: i + 1,
+            url: `https://comichome.app/search?q=${encodeURIComponent(item.title)}`,
+            name: item.title,
+          })),
+        },
+      };
+
+  useSeo({
+    title: "Anime Recommendations by Taste",
+    description:
+      "Discover anime and manga recommendations matched to your taste. Browse the live trending chart, search the full catalog, and find your next favorite series.",
+    path: "/",
+    jsonLd,
+  });
 
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">

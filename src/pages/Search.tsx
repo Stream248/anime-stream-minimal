@@ -8,6 +8,7 @@ import { BannerAd } from "@/components/BannerAd";
 import { AnimeCard } from "@/components/TrendingGrid";
 import type { TrendingAnime } from "@/hooks/use-trending-anime";
 import { Loader2, SearchX } from "lucide-react";
+import { useSeo } from "@/hooks/use-seo";
 
 type SearchState = "idle" | "loading" | "done" | "error";
 
@@ -66,6 +67,15 @@ export default function Search() {
       cancelled = true;
     };
   }, [debounced, searchAnime]);
+
+  // Reflect the active query in the document title so in-site searches are
+  // indexable and shareable ("Comics Home search: Frieren").
+  useSeo({
+    title: debounced.length >= 2 ? `Search: ${debounced}` : "Search the catalog",
+    description:
+      "Search the full Comic Home anime and manga catalog by title — English or Japanese, partial words work. Results are ordered by community popularity.",
+    path: debounced.length >= 2 ? `/search?q=${encodeURIComponent(debounced)}` : "/search",
+  });
 
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">

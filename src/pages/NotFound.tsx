@@ -1,6 +1,14 @@
 import { motion } from "framer-motion";
+import { useSeo } from "@/hooks/use-seo";
 
 export default function NotFound() {
+  useSeo({
+    title: "Page not found",
+    description:
+      "That page doesn't exist on Comic Home. Head back to the trending chart or search the catalog.",
+    path: "/404",
+  });
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
