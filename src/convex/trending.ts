@@ -1,5 +1,5 @@
 import { v } from "convex/values";
-import { internalAction, internalMutation, mutation, query } from "./_generated/server";
+import { action, internalAction, internalMutation, mutation, query } from "./_generated/server";
 import { internal } from "./_generated/api";
 
 const JIKAN_TOP_ANIME_URL =
@@ -80,6 +80,28 @@ export const maybeRefreshTrending = mutation({
     if (!latest || now - latest._creationTime > REFRESH_INTERVAL_MS) {
       await ctx.scheduler.runAfter(0, internal.trending.refreshTrending, {});
     }
+  },
+});
+
+/**
+ * Public search against Jikan. Deliberately an action so it hits Jikan
+ * directly with no caching layer; the client debounces while typing.
+ */
+export const searchAnime = action({
+  args: { q: v.string() },
+  handler: async (_ctx, args) => {
+    const q = args.q.trim();
+    if (q.length < 2) return [];
+
+    const res = await fetch(
+      `https://api.jikan.moe/v4/anime?q=${encodeURIComponent(q)}&limit=12&order_by=members&sort=desc`,
+    );
+    if (!res.ok) {
+      throw new Error(`Jikan search failed: ${res.status} ${res.statusText}`);
+    }
+    const data = (await res.json()) as { data?: JikanAnimeEntry[] };
+
+    return (data.data ?? []).map((entry, i) => mapEntry(entry, i + 1));
   },
 });
 

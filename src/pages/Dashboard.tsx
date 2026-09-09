@@ -28,8 +28,8 @@ export default function Dashboard() {
             Welcome back{user?.name ? `, ${user.name.split(" ")[0]}` : ""}.
           </h1>
           <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground">
-            Here's what the community is watching right now. Rankings refresh
-            every six hours from MyAnimeList.
+            Here's what viewers with tastes like yours are watching right now.
+            Rankings refresh every six hours from MyAnimeList.
           </p>
         </section>
 
@@ -40,7 +40,7 @@ export default function Dashboard() {
         <section className="mx-auto w-full max-w-6xl px-6 py-12">
           <div className="flex flex-wrap items-baseline justify-between gap-2">
             <h2 className="text-lg font-semibold tracking-tight">
-              Trending now
+              Picked for you · Trending
             </h2>
             <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
               <RefreshCw className="size-3" />

@@ -1,32 +1,33 @@
 import { motion } from "framer-motion";
-import { ArrowRight, BarChart3, Compass, Fingerprint, MonitorPlay } from "lucide-react";
+import { ArrowRight, Compass, MessagesSquare, Search, SlidersHorizontal } from "lucide-react";
 import { Link } from "react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { AdSlot } from "@/components/AdSlot";
 import { TrendingGrid, TrendingSkeleton } from "@/components/TrendingGrid";
+import { FeedbackSection } from "@/components/FeedbackSection";
 import { useTrendingAnime } from "@/hooks/use-trending-anime";
 
 const FEATURES = [
   {
+    icon: SlidersHorizontal,
+    title: "Matched to your taste",
+    body: "Titles are ranked by what the community actually watches, so the list reads less like a database and more like a recommendation from a friend with similar taste.",
+  },
+  {
+    icon: Search,
+    title: "Search everything",
+    body: "Remember half a title? Type it in. The full catalog is searchable — English or Japanese names, partial words, no account needed.",
+  },
+  {
+    icon: MessagesSquare,
+    title: "You shape the next version",
+    body: "Report a problem or suggest an improvement in two clicks. Every note goes straight to the people building Comic Home.",
+  },
+  {
     icon: Compass,
-    title: "A curated index",
-    body: "Top titles, one calm list. No feeds, no noise — just what the community is watching right now.",
-  },
-  {
-    icon: Fingerprint,
-    title: "Built to be read",
-    body: "Near-monochrome, generous spacing, hairline dividers. The catalog is the interface.",
-  },
-  {
-    icon: MonitorPlay,
-    title: "Free to browse",
-    body: "Every rank, score and metadata line is public. An ad keeps it that way — no account required.",
-  },
-  {
-    icon: BarChart3,
-    title: "Live rankings",
-    body: "The list refreshes from Jikan (MyAnimeList) every six hours, so trending stays trending.",
+    title: "Quiet by design",
+    body: "One calm page, generous spacing, nothing blinking for your attention. Finding your next series shouldn't feel like work.",
   },
 ];
 
@@ -47,15 +48,16 @@ export default function Landing() {
             className="max-w-3xl"
           >
             <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
-              Anime &amp; Manga
+              Anime &amp; manga recommendations
             </p>
             <h1 className="mt-6 text-4xl leading-[1.05] font-semibold tracking-tight text-balance sm:text-6xl">
-              Every series worth your evening, on one quiet page.
+              Anime recommendations that actually match your taste.
             </h1>
             <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-              Aniverse is a minimal library of anime and manga. Browse what's
-              trending, check a score, and move on — no clutter, no accounts,
-              no noise.
+              Comic Home sorts the world of anime and manga into one readable
+              list, ranked by what people like you are watching right now.
+              Browse the trending chart or search the full catalog — then tell
+              us what to improve.
             </p>
             <div className="mt-10 flex flex-wrap items-center gap-3">
               <Link
@@ -65,12 +67,13 @@ export default function Landing() {
                 Browse trending
                 <ArrowRight className="size-4" />
               </Link>
-              <a
-                href="#trending"
-                className="inline-flex h-11 items-center rounded-md px-4 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+              <Link
+                to="/search"
+                className="inline-flex h-11 items-center justify-center gap-2 rounded-md border border-border px-6 text-sm font-medium text-foreground transition-colors hover:bg-muted/60"
               >
-                See what's popular ↓
-              </a>
+                <Search className="size-4" />
+                Search the catalog
+              </Link>
             </div>
           </motion.div>
 
@@ -88,14 +91,23 @@ export default function Landing() {
         {/* Trending */}
         <section id="trending" className="mx-auto w-full max-w-6xl px-6 py-16 sm:py-20">
           <div className="flex flex-wrap items-baseline justify-between gap-2">
-            <h2 className="text-xl font-semibold tracking-tight">Trending now</h2>
+            <h2 className="text-xl font-semibold tracking-tight">
+              Trending with viewers like you
+            </h2>
             <p className="text-xs text-muted-foreground">
-              By popularity · Updated every 6 hours
+              Ranked by popularity · Refreshed every 6 hours
             </p>
           </div>
           <div className="mt-8">
             {isLoading ? <TrendingSkeleton /> : <TrendingGrid anime={anime ?? []} />}
           </div>
+          <p className="mt-8 text-sm text-muted-foreground">
+            Not seeing anything that fits?{" "}
+            <Link to="/search" className="underline underline-offset-4 hover:text-foreground">
+              Search the full catalog
+            </Link>{" "}
+            instead.
+          </p>
         </section>
 
         {/* In-feed ad between list sections */}
@@ -106,7 +118,7 @@ export default function Landing() {
         {/* Features */}
         <section className="mx-auto w-full max-w-6xl px-6 py-16 sm:py-20">
           <h2 className="text-xl font-semibold tracking-tight">
-            Why Aniverse feels different
+            Built around how you pick what to watch
           </h2>
           <div className="mt-10 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
             {FEATURES.map((f) => (
@@ -121,14 +133,17 @@ export default function Landing() {
           </div>
         </section>
 
+        {/* Public feedback */}
+        <FeedbackSection />
+
         {/* CTA */}
-        <section className="border-y border-border/80">
+        <section>
           <div className="mx-auto w-full max-w-6xl px-6 py-20 text-center">
             <h2 className="text-2xl font-semibold tracking-tight text-balance sm:text-3xl">
               Start with what everyone is watching.
             </h2>
             <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-muted-foreground">
-              Create a free account to keep browsing past the public list, or
+              Create a free account to save your place and keep browsing, or
               sign in if you already have one.
             </p>
             <div className="mt-8 flex items-center justify-center gap-3">

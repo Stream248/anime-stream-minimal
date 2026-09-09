@@ -9,7 +9,13 @@ function compact(n: number) {
  * Minimal trending card: poster, rank, title, one metadata line. No boxes,
  * no shadows — separation comes from spacing and the poster's own edge.
  */
-export function AnimeCard({ anime }: { anime: TrendingAnime }) {
+export function AnimeCard({
+  anime,
+  showRank = true,
+}: {
+  anime: TrendingAnime;
+  showRank?: boolean;
+}) {
   const meta = [
     anime.type,
     anime.year,
@@ -39,9 +45,11 @@ export function AnimeCard({ anime }: { anime: TrendingAnime }) {
             No image
           </div>
         )}
-        <span className="absolute left-2 top-2 rounded-sm bg-background/85 px-1.5 py-0.5 text-[10px] font-medium tabular-nums text-foreground backdrop-blur-sm">
-          #{anime.rank}
-        </span>
+        {showRank && (
+          <span className="absolute left-2 top-2 rounded-sm bg-background/85 px-1.5 py-0.5 text-[10px] font-medium tabular-nums text-foreground backdrop-blur-sm">
+            #{anime.rank}
+          </span>
+        )}
       </div>
       <div className="mt-3">
         <p className="truncate text-sm font-medium text-foreground group-hover:underline group-focus-visible:underline">

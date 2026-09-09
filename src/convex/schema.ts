@@ -47,6 +47,13 @@ const schema = defineSchema(
       members: v.optional(v.number()),
       genres: v.array(v.string()),
     }).index("by_rank", ["rank"]),
+
+    // Public feedback: issues and suggestions submitted by visitors.
+    feedback: defineTable({
+      kind: v.union(v.literal("issue"), v.literal("suggestion")),
+      message: v.string(),
+      email: v.optional(v.string()),
+    }),
   },
   {
     schemaValidation: false,

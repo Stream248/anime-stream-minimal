@@ -21,14 +21,22 @@ export function SiteHeader() {
           className="flex items-baseline gap-2 transition-opacity hover:opacity-70"
         >
           <span className="text-lg font-semibold tracking-tight text-foreground">
-            Aniverse
+            Comic Home
           </span>
           <span className="hidden text-xs uppercase tracking-[0.25em] text-muted-foreground sm:inline">
-            Library
+            Anime, by taste
           </span>
         </button>
 
         <nav className="flex items-center gap-2">
+          <Button
+            variant="ghost"
+            size="sm"
+            className="text-muted-foreground hover:text-foreground"
+            onClick={() => navigate("/search")}
+          >
+            Search
+          </Button>
           {isLoading ? (
             <span className="text-xs text-muted-foreground">···</span>
           ) : isAuthenticated ? (
