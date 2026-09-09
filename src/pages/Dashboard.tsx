@@ -1,6 +1,7 @@
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { AdSlot } from "@/components/AdSlot";
+import { BannerAd } from "@/components/BannerAd";
 import { TrendingGrid, TrendingSkeleton } from "@/components/TrendingGrid";
 import { useTrendingAnime } from "@/hooks/use-trending-anime";
 import { useAuth } from "@/hooks/use-auth";
@@ -74,8 +75,8 @@ export default function Dashboard() {
           </div>
         </section>
 
-        <div className="mx-auto w-full max-w-6xl px-6">
-          <AdSlot slot="library-bottom" className="mb-12" minHeight={90} />
+        <div className="mx-auto w-full max-w-6xl px-6 mb-12">
+          <BannerAd />
         </div>
       </main>
 

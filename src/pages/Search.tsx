@@ -4,7 +4,7 @@ import { useSearchParams } from "react-router";
 import { api } from "@/convex/_generated/api";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
-import { AdSlot } from "@/components/AdSlot";
+import { BannerAd } from "@/components/BannerAd";
 import { AnimeCard } from "@/components/TrendingGrid";
 import type { TrendingAnime } from "@/hooks/use-trending-anime";
 import { Loader2, SearchX } from "lucide-react";
@@ -147,7 +147,7 @@ export default function Search() {
                 ))}
               </div>
               <div className="mt-14">
-                <AdSlot slot="search-bottom" minHeight={90} />
+                <BannerAd />
               </div>
             </>
           )}

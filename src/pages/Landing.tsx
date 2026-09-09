@@ -3,7 +3,7 @@ import { ArrowRight, Compass, MessagesSquare, Search, SlidersHorizontal } from "
 import { Link } from "react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
-import { AdSlot } from "@/components/AdSlot";
+import { BannerAd } from "@/components/BannerAd";
 import { TrendingGrid, TrendingSkeleton } from "@/components/TrendingGrid";
 import { FeedbackSection } from "@/components/FeedbackSection";
 import { useTrendingAnime } from "@/hooks/use-trending-anime";
@@ -79,7 +79,7 @@ export default function Landing() {
 
           {/* Top banner ad — above the fold, content to the right */}
           <div className="mt-16">
-            <AdSlot slot="home-top-banner" minHeight={90} />
+            <BannerAd />
           </div>
         </section>
 
@@ -112,7 +112,7 @@ export default function Landing() {
 
         {/* In-feed ad between list sections */}
         <div className="mx-auto w-full max-w-6xl px-6">
-          <AdSlot slot="home-in-feed" minHeight={120} label="Sponsored" />
+          <BannerAd label="Sponsored" />
         </div>
 
         {/* Features */}
