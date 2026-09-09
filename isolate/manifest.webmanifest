@@ -1,7 +1,7 @@
 {
-  "name": "freebuff.com application",
-  "short_name": "freebuff.com",
-  "description": "freebuff.com application",
+  "name": "Comic Home",
+  "short_name": "Comic Home",
+  "description": "Anime and manga recommendations matched to your taste.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
